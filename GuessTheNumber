@@ -1,0 +1,70 @@
+import sys
+import time
+import random
+
+def numberChecker(x, y):
+	out = True
+	
+	if x == y:
+		print("Congratulations, you guessed the number!")
+		out = False
+	elif x > y:
+		print("Sorry, but that's too high!")
+	elif x < y:
+		print("Nope, not high enough!")
+		
+	return out
+
+print("=== Welcome to the Incredible Guessing Game! === \nPerfect if you want to waste time, trying to guess a randomly generated number \n\nDo you want to play?")
+c = 0
+
+while True:
+	choice = input("Please enter Y or N: ")
+	
+	if c == 2 and choice == "N":
+		break
+
+	while True:
+		if choice == "Y":
+			if c == 0:
+				print("\nAre you sure? Again, all you do is guess a random, computer-generated number!")
+				choice = input("\nPlease reconsider. Enter Y if you want to waste time or N to be a productive member of society: ")
+				c = 1
+			elif c == 1:
+				print("\nI appreciate the interest I suppose, but prepare to be disappointed...\n")
+				break
+			elif c == 2:
+				print("\nAlright, you know the drill by now!\n")
+				break
+		elif choice == "N":
+			print("\nSmart move, not sure what kind of weirdo wants to play Guess the Number with a computer...\n")
+			sys.exit(0)
+		else:
+			print("\nSomeone's bad at following instructions! Let's try this again!\n")
+			choice = input("Please enter Y or N: ")
+
+	#Code starts here
+
+	print("Alright, let me think of a number between 1 and 20...")
+
+	number = random.randint(1,21)
+
+	time.sleep(1)
+
+	print("Ok, got it! Take a guess!")
+	guess = input()
+
+	cond = numberChecker(int(guess), number)
+
+	while cond:
+		guess = input("Try again: ")
+		cond = numberChecker(int(guess), number)
+		
+	if c != 2:
+		print("\nI don't see why you would, but my programmer wants me to ask you if you'd like to play again?")
+	else:
+		print("\nClearly you have nothing to do, or way to much to do, and a bad procrastination habit... Either way, want to play again?")
+	c = 2	
+
+
+print("\nI hope you're proud of yourself, you spent your time guessing random numbers instead of doing your homework. Get a life.")
